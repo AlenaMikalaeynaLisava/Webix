@@ -77,7 +77,7 @@ webix.ready(function(){
     
     webix.ui({
         type:"line",
-        rows:[ firstRow, secondRow, thirdRow]
+        rows:[ firstRow, secondRow, thirdRow,{}]
     });
     
     function addItem(){
