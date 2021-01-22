@@ -38,7 +38,6 @@ webix.ready(function(){
             autoConfig:true,
             data:small_film_set,
             scrollX:false},
-            {}
             ]
                 
               },
@@ -66,31 +65,26 @@ webix.ready(function(){
                 ]
             }
         ],
-        minHeight:450,
         gravity: 15
     }
     const thirdRow = {
         template: "html->my_box1",
-        height: 40,
         gravity: 1,
         css:"template",
-        type:"line"
     }
     
     webix.ui({
+        type:"line",
         rows:[ firstRow, secondRow, thirdRow]
     });
     
     function addItem(){
         const item_data = $$("myform").getValues();
-        console.log(item_data);
         $$("mydatatable").add(item_data);
       };
     
     function clear_form(){
-        console.log($$("myform"));
         $$("myform").clear();
-        console.log($$("myform"));
       };
     
     });  
