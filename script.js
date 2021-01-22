@@ -31,15 +31,12 @@ webix.ready(function(){
             {
                 gravity: 9,
                 scrollY:true,
-                rows:[
-            {view:"datatable",
+            view:"datatable",
             id:"mydatatable",
             minHeight:450,
             autoConfig:true,
             data:small_film_set,
-            scrollX:false},
-            ]
-                
+            scrollX:false 
               },
               {gravity: 4,
                 view:"form", 
