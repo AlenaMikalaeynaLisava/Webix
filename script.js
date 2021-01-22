@@ -70,4 +70,3 @@ const thirdRow = {
 webix.ui({
     rows:[ firstRow, secondRow, thirdRow]
 });
-// webix.ui.fullScreen();
