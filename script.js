@@ -69,8 +69,10 @@ webix.ready(function(){
     }
     const thirdRow = {
         template: "html->my_box1",
+        height: 40,
         gravity: 1,
         css:"template",
+        
     }
     
     webix.ui({
