@@ -1,15 +1,15 @@
 webix.ready(function(){
     const firstRow = {
-        view:"layout",
+        view:"toolbar", 
         css:"webix_dark",
         cols:[
             {view:"button",
           id:"mybutton",
           value:"My App",
-          css:"header_button"
+          css:"webix_transparent header_button"
             },
             {},
-            { view:"label", label:"<span class='my_span'><span class='webix_icon wxi-user'></span> Profile</span>", css:"material my_label"},
+            { view:"button", id:"button1", type:"icon", icon:"wxi-user", label: "Profile",  css:"webix_transparent my_label"}
         ],
         gravity: 1
     }
@@ -19,7 +19,6 @@ webix.ready(function(){
                 css: "left_bar",
                 rows:[
                 { view:"list",
-                // id:"film_list",
                 scroll:false,
                 id:"mylist",
                 data:[ "Dashboard", "Users", "Products", "Locations"],
@@ -33,7 +32,6 @@ webix.ready(function(){
                 scrollY:true,
             view:"datatable",
             id:"mydatatable",
-            minHeight:450,
             autoConfig:true,
             data:small_film_set,
             scrollX:false 
@@ -41,7 +39,7 @@ webix.ready(function(){
               {gravity: 4,
                 view:"form", 
                 id:"myform",
-                autoheight: true ,
+                autoheight: false,
                 elements:[
                     { view:"template", template:"edit films", type:"section" },
                     { view:"text", label:"Title", name:"Title"},
@@ -74,7 +72,7 @@ webix.ready(function(){
     
     webix.ui({
         type:"line",
-        rows:[ firstRow, secondRow, thirdRow,{}]
+        rows:[ firstRow, secondRow, thirdRow]
     });
     
     function addItem(){
