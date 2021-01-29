@@ -3,12 +3,15 @@ webix.ready(function(){
         view:"window",
         id:"mywindow",
         position:"bottom",
+        head:false,
         body:{
             view:"datatable",
             id:"mydatatable1",
             header:false,
             scroll:false,
             title:false,
+            autoheight:true,
+            width:250,
             autoConfig:true,
             data: [
                 { id:1, title:"Settings"},
@@ -20,10 +23,11 @@ webix.ready(function(){
       view:"window",
       id:"mywindow1",
       position:"center",
-    //   title:false,
       move:true,
       height:250,
       width:250,
+      head:"You can close the window",
+      close:true,
       body:{
           template:"validation is successful",
       }
@@ -86,9 +90,8 @@ webix.ready(function(){
                                 var item = $$("myform").getValues();
                                 console.log(item);
                                 $$("mydatatable").add(item);
+                                // webix.message({text:"validation is successful"})
                                 $$("mywindow1").show()
-                            }else{
-                                
                             }
                           }},
                         { view:"button", 
