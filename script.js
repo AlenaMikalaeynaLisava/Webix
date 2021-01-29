@@ -1,17 +1,15 @@
 webix.ready(function(){
     webix.ui({
-        view:"window",
+        view:"popup",
         id:"mywindow",
-        head:false,
         body:{
             view:"list",
             data:[ "Settings", "Log out"],
             autoheight:true,
             width:250,
-            css:"webix_list webix_list_item"
         }
     })
-    let lighthouse = 0;
+
     const firstRow = {
         view:"toolbar", 
         id:"firstrow",
@@ -24,28 +22,22 @@ webix.ready(function(){
             },
             {},
             { view:"button", id:"button1", type:"icon", icon:"wxi-user", label: "Profile",  css:"webix_transparent my_label", click:function(){
-                webix.event($$("button1").getNode(), "click", function(){
-                    webix.message("List was clicked");
-                });
-                // $$("mywindow").show($$("button1"));
-                $$("mywindow").show({pos:"left", y:40});
-                // console.log($$("button1"));
+                $$("mywindow").show($$("button1").getNode());
             }}
         ],
-        gravity: 1
     }
-    // var node = $$(firstrow);
-    // console.log(node);
+
     const secondRow = {
         cols:[
             {gravity: 2,
                 css: "left_bar",
                 rows:[
                 { view:"list",
+                borderless:true,
                 scroll:false,
                 id:"mylist",
                 data:[ "Dashboard", "Users", "Products", "Locations"],
-                css:"webix_list1 webix_list_item1"
+                css:"webix_list1"
                 },
                 {view:"label", label:"<span class='my_span1'><span class='webix_icon wxi-check'></span> Connected</span>", css:"material, label_text-staff"}
             ]},
@@ -62,7 +54,6 @@ webix.ready(function(){
             {gravity: 4,
                 view:"form", 
                 id:"myform",
-                autoheight: false,
                 elements:[
                     { view:"template", template:"edit films", type:"section" },
                     { view:"text", label:"Title", name:"title", invalidMessage:"Title should be entered"},
@@ -80,9 +71,7 @@ webix.ready(function(){
                                 $$("mydatatable").add(item);
                                 webix.message({text:"validation is successful"})
                                 // $$("mywindow1").show()
-                            } else{
-                                lighthouse =1;
-                            }
+                            } 
                           }},
                         { view:"button", 
                         id:"clear_button",
@@ -109,8 +98,7 @@ webix.ready(function(){
                     }
                      }
             }
-        ],
-        gravity: 15
+        ]
     }
 
     const thirdRow = {
@@ -127,7 +115,6 @@ webix.ready(function(){
     });
       
     function clear_form(){
-        if(lighthouse == 1){
             webix.confirm({
                 title:false,
                 text:"Do you want to clear the form?"
@@ -140,10 +127,5 @@ webix.ready(function(){
                   webix.message("Rejected");
                 }
               );
-              lighthouse =0;
-        } else{
-            $$("myform").clear();
-        }
-
       };
     });  
