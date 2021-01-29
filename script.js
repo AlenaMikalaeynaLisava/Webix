@@ -2,38 +2,19 @@ webix.ready(function(){
     webix.ui({
         view:"window",
         id:"mywindow",
-        position:"bottom",
         head:false,
         body:{
-            view:"datatable",
-            id:"mydatatable1",
-            header:false,
-            scroll:false,
-            title:false,
+            view:"list",
+            data:[ "Settings", "Log out"],
             autoheight:true,
             width:250,
-            autoConfig:true,
-            data: [
-                { id:1, title:"Settings"},
-                { id:2, title:"Log out"}
-            ]
+            css:"webix_list webix_list_item"
         }
     })
-    webix.ui( {
-      view:"window",
-      id:"mywindow1",
-      position:"center",
-      move:true,
-      height:250,
-      width:250,
-      head:"You can close the window",
-      close:true,
-      body:{
-          template:"validation is successful",
-      }
-  })
+    let lighthouse = 0;
     const firstRow = {
         view:"toolbar", 
+        id:"firstrow",
         css:"webix_dark",
         cols:[
             {view:"button",
@@ -43,11 +24,17 @@ webix.ready(function(){
             },
             {},
             { view:"button", id:"button1", type:"icon", icon:"wxi-user", label: "Profile",  css:"webix_transparent my_label", click:function(){
+                webix.event($$("button1").getNode(), "click", function(){
+                    webix.message("List was clicked");
+                });
                 $$("mywindow").show($$("button1"));
+                console.log($$("button1"));
             }}
         ],
         gravity: 1
     }
+    // var node = $$(firstrow);
+    // console.log(node);
     const secondRow = {
         cols:[
             {gravity: 2,
@@ -57,7 +44,7 @@ webix.ready(function(){
                 scroll:false,
                 id:"mylist",
                 data:[ "Dashboard", "Users", "Products", "Locations"],
-                css:"webix_list webix_list_item"
+                css:"webix_list1 webix_list_item1"
                 },
                 {view:"label", label:"<span class='my_span1'><span class='webix_icon wxi-check'></span> Connected</span>", css:"material, label_text-staff"}
             ]},
@@ -90,8 +77,10 @@ webix.ready(function(){
                                 var item = $$("myform").getValues();
                                 console.log(item);
                                 $$("mydatatable").add(item);
-                                // webix.message({text:"validation is successful"})
-                                $$("mywindow1").show()
+                                webix.message({text:"validation is successful"})
+                                // $$("mywindow1").show()
+                            } else{
+                                lighthouse =1;
                             }
                           }},
                         { view:"button", 
@@ -135,16 +124,25 @@ webix.ready(function(){
         type:"line",
         rows:[ firstRow, secondRow, thirdRow]
     });
-    
-    // function addItem(){
-    //     const item_data = $$("myform").getValues();
-    //     $$("mydatatable").add(item_data);
-    //   };
-    
+      
     function clear_form(){
-        $$("myform").clear();
-        $$("myform").clearValidation();
+        if(lighthouse == 1){
+            webix.confirm({
+                title:false,
+                text:"Do you want to clear the form?"
+              }).then(
+                function(){
+                  $$("myform").clear();
+                  $$("myform").clearValidation();
+                }, 
+                function(){
+                  webix.message("Rejected");
+                }
+              );
+              lighthouse =0;
+        } else{
+            $$("myform").clear();
+        }
+
       };
-
-
     });  
