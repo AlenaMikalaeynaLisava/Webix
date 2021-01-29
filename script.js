@@ -12,16 +12,13 @@ webix.ready(function(){
 
     const firstRow = {
         view:"toolbar", 
+        
         id:"firstrow",
         css:"webix_dark",
         cols:[
-            {view:"button",
-          id:"mybutton",
-          value:"My App",
-          css:"webix_transparent header_button"
-            },
+            {template:"My app", type:"header", borderless:true},
             {},
-            { view:"button", id:"button1", type:"icon", icon:"wxi-user", label: "Profile",  css:"webix_transparent my_label", click:function(){
+            { view:"button", id:"button1", type:"icon", icon:"wxi-user", label: "Profile", width:100, css:"webix_transparent my_label", click:function(){
                 $$("mywindow").show($$("button1").getNode());
             }}
         ],
@@ -104,7 +101,6 @@ webix.ready(function(){
     const thirdRow = {
         template: "html->my_box1",
         height: 40,
-        gravity: 1,
         css:"template",
         
     }
