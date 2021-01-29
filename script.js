@@ -3,14 +3,10 @@ webix.ready(function(){
         view:"window",
         id:"mywindow",
         position:"bottom",
-        // head:"Settings",
         body:{
             view:"datatable",
             id:"mydatatable1",
             header:false,
-            // columns:[
-            //     // { id:"col1", header:"Title", hidden:true,  width:50}
-            // ],
             scroll:false,
             title:false,
             autoConfig:true,
@@ -20,7 +16,18 @@ webix.ready(function(){
             ]
         }
     })
-
+    webix.ui( {
+      view:"window",
+      id:"mywindow1",
+      position:"center",
+    //   title:false,
+      move:true,
+      height:250,
+      width:250,
+      body:{
+          template:"validation is successful",
+      }
+  })
     const firstRow = {
         view:"toolbar", 
         css:"webix_dark",
@@ -59,33 +66,60 @@ webix.ready(function(){
             autoConfig:true,
             data:small_film_set,
             scrollX:false 
-              },
-              {gravity: 4,
+            },
+            {gravity: 4,
                 view:"form", 
                 id:"myform",
                 autoheight: false,
                 elements:[
                     { view:"template", template:"edit films", type:"section" },
-                    { view:"text", label:"Title", name:"Title"},
-                    { view:"text", label:"Year", name:"Year" },
-                    { view:"text", label:"Rating", name:"Rating" },
-                    { view:"text", label:"Votes",  name:"Votes"},
+                    { view:"text", label:"Title", name:"title", invalidMessage:"Title should be entered"},
+                    { view:"text", label:"Year", name:"year", invalidMessage:"Enter year between 1970 and 2021" },
+                    { view:"text", label:"Votes",  name:"votes", invalidMessage:"Votes must be less than 100000"},
+                    { view:"text", label:"Rating", name:"rating", invalidMessage:"Enter non zero rating, please" },
                     {cols:[
                         { view:"button", 
                          id:"add_button",
                          value:"Add new", css:"webix_primary", 
-                        click:addItem 
-                        },
+                         click:function(){
+                            if($$("myform").validate()){
+                                var item = $$("myform").getValues();
+                                console.log(item);
+                                $$("mydatatable").add(item);
+                                $$("mywindow1").show()
+                            }else{
+                                
+                            }
+                          }},
                         { view:"button", 
                         id:"clear_button",
                         value:"Clear", 
                         click:clear_form}
-                    ]}
-                ]
+                    ]},
+                    {}
+                ],
+                    rules:{
+                        title:webix.rules.isNotEmpty,
+                        year:function(value){
+                            return value>1970 && value <2021;
+                          },
+                        votes:function(value){
+                            return value<100000;
+                        },
+                        rating: function(value){
+                            return value!=0 && webix.rules.isNotEmpty;
+                        }
+                   },
+                   on:{
+                    onValidationError:function(key){
+                      webix.message({text:key+" field is incorrect", type:"error"});
+                    }
+                     }
             }
         ],
         gravity: 15
     }
+
     const thirdRow = {
         template: "html->my_box1",
         height: 40,
@@ -99,13 +133,14 @@ webix.ready(function(){
         rows:[ firstRow, secondRow, thirdRow]
     });
     
-    function addItem(){
-        const item_data = $$("myform").getValues();
-        $$("mydatatable").add(item_data);
-      };
+    // function addItem(){
+    //     const item_data = $$("myform").getValues();
+    //     $$("mydatatable").add(item_data);
+    //   };
     
     function clear_form(){
         $$("myform").clear();
+        $$("myform").clearValidation();
       };
 
 
