@@ -27,8 +27,9 @@ webix.ready(function(){
                 webix.event($$("button1").getNode(), "click", function(){
                     webix.message("List was clicked");
                 });
-                $$("mywindow").show($$("button1"));
-                console.log($$("button1"));
+                // $$("mywindow").show($$("button1"));
+                $$("mywindow").show({pos:"left", y:40});
+                // console.log($$("button1"));
             }}
         ],
         gravity: 1
