@@ -1,4 +1,26 @@
 webix.ready(function(){
+    webix.ui({
+        view:"window",
+        id:"mywindow",
+        position:"bottom",
+        // head:"Settings",
+        body:{
+            view:"datatable",
+            id:"mydatatable1",
+            header:false,
+            // columns:[
+            //     // { id:"col1", header:"Title", hidden:true,  width:50}
+            // ],
+            scroll:false,
+            title:false,
+            autoConfig:true,
+            data: [
+                { id:1, title:"Settings"},
+                { id:2, title:"Log out"}
+            ]
+        }
+    })
+
     const firstRow = {
         view:"toolbar", 
         css:"webix_dark",
@@ -9,7 +31,9 @@ webix.ready(function(){
           css:"webix_transparent header_button"
             },
             {},
-            { view:"button", id:"button1", type:"icon", icon:"wxi-user", label: "Profile",  css:"webix_transparent my_label"}
+            { view:"button", id:"button1", type:"icon", icon:"wxi-user", label: "Profile",  css:"webix_transparent my_label", click:function(){
+                $$("mywindow").show($$("button1"));
+            }}
         ],
         gravity: 1
     }
@@ -83,5 +107,6 @@ webix.ready(function(){
     function clear_form(){
         $$("myform").clear();
       };
-    
+
+
     });  
