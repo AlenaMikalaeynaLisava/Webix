@@ -1,4 +1,5 @@
 webix.ready(function(){
+
     webix.ui({
         view:"popup",
         id:"mywindow",
@@ -24,78 +25,82 @@ webix.ready(function(){
         ],
     }
 
-    const secondRow = {
-        cols:[
-            {gravity: 2,
-                css: "left_bar",
-                rows:[
-                { view:"list",
-                borderless:true,
-                scroll:false,
-                id:"mylist",
-                data:[ "Dashboard", "Users", "Products", "Locations"],
-                css:"webix_list1"
-                },
-                {view:"label", label:"<span class='my_span1'><span class='webix_icon wxi-check'></span> Connected</span>", css:"material, label_text-staff"}
-            ]},
-            { view:"resizer" },
-            {
-                gravity: 9,
-                scrollY:true,
-            view:"datatable",
-            id:"mydatatable",
-            autoConfig:true,
-            data:small_film_set,
-            scrollX:false 
+    var sidemulti = { 
+        css:"menu",
+        rows:[ 
+          { 
+            view:"list",
+            id:"mylist1",
+            width:200,
+            scroll:false,
+            select:true,
+            on:{
+                onAfterSelect:function(id){ 
+                  $$(id).show();
+              }
             },
-            {gravity: 4,
-                view:"form", 
-                id:"myform",
-                elements:[
-                    { view:"template", template:"edit films", type:"section" },
-                    { view:"text", label:"Title", name:"title", invalidMessage:"Title should be entered"},
-                    { view:"text", label:"Year", name:"year", invalidMessage:"Enter year between 1970 and 2021" },
-                    { view:"text", label:"Votes",  name:"votes", invalidMessage:"Votes must be less than 100000"},
-                    { view:"text", label:"Rating", name:"rating", invalidMessage:"Enter non zero rating, please" },
-                    {cols:[
-                        { view:"button", 
-                         id:"add_button",
-                         value:"Add new", css:"webix_primary", 
-                         click:function(){
-                            if($$("myform").validate()){
-                                var item = $$("myform").getValues();
-                                console.log(item);
-                                $$("mydatatable").add(item);
-                                webix.message({text:"validation is successful"})
-                                // $$("mywindow1").show()
-                            } 
-                          }},
-                        { view:"button", 
-                        id:"clear_button",
-                        value:"Clear", 
-                        click:clear_form}
-                    ]},
-                    {}
-                ],
-                    rules:{
-                        title:webix.rules.isNotEmpty,
-                        year:function(value){
-                            return value>1970 && value <2021;
-                          },
-                        votes:function(value){
-                            return value<100000;
-                        },
-                        rating: function(value){
-                            return value!=0 && webix.rules.isNotEmpty;
-                        }
-                   },
-                   on:{
-                    onValidationError:function(key){
-                      webix.message({text:key+" field is incorrect", type:"error"});
-                    }
-                     }
-            }
+            data:[ "Dashboard", "Users", "Products", "Admin"]
+          }
         ]
+      };
+
+
+     var data = { columnWidth:70, view:"datatable", id:"newdatatable", autoConfig:true,  url:"data/data.js", scrollX:false};
+
+      var form = {
+        view:"form",
+        id:"formform",
+        width:280,
+        elements:[
+          { type:"section", template:"Edit films" },
+          { view:"text", label:"Title" },
+          { view:"text", label:"Year" },
+          { view:"text", label:"Votes" },
+          { view:"text", label:"Rating" },
+          {cols:[
+            { view:"button", 
+            id:"add_button1",
+            value:"Add new", css:"webix_primary", 
+            click:function(){
+                if($$("formform").validate()){
+                    var item = $$("formform").getValues();
+                    $$("newdatatable").add(item);
+                    // webix.message({text:"validation is successful"})
+                    // $$("mywindow1").show()
+                } 
+            }},
+            // { view:"button", 
+            // id:"clear_button1",
+            // value:"Clear", 
+            // click:clear_formform},
+            { view:"button", 
+            id:"delete_button1",
+            value:"Delete", 
+            // click:clear_formform
+        },
+            { view:"button", 
+            id:"edit_button1",
+            value:"Edit data", 
+            // click:clear_formform
+        },
+        ]},
+          {}
+        ]
+      }; 
+    var mainmulti = {
+        cells:[ 
+            { id:"Dashboard", 
+            cols:[
+                data,
+                form
+            ]},
+          { id:"Users", template:"Users View"},
+          { id:"Products", template:"Products view"},
+          { id:"Admin", template:"Admin View"}
+        ]
+      };
+    const secondRow = {
+            cols:[sidemulti, {view:"resizer"}, mainmulti] 
     }
 
     const thirdRow = {
@@ -124,4 +129,8 @@ webix.ready(function(){
                 }
               );
       };
+//       function clear_formform(){
+//               $$("formform").clear();
+//               $$("formform").clearValidation();
+//   };
     });  
