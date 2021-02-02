@@ -1,19 +1,7 @@
 webix.ready(function(){
 
-    webix.ui({
-        view:"popup",
-        id:"mywindow",
-        body:{
-            view:"list",
-            data:[ "Settings", "Log out"],
-            autoheight:true,
-            width:250,
-        }
-    })
-
     const firstRow = {
         view:"toolbar", 
-        
         id:"firstrow",
         css:"webix_dark",
         cols:[
@@ -45,48 +33,43 @@ webix.ready(function(){
       };
 
 
-     var data = { columnWidth:70, view:"datatable", id:"newdatatable", autoConfig:true,  url:"data/data.js", scrollX:false};
+     var data = {columnWidth:70, view:"datatable", select:true, id:"newdatatable", autoConfig:true,  url:"data/data.js",  scrollX:false
+      };
 
-      var form = {
+    var form = {
         view:"form",
-        id:"formform",
-        width:280,
+        id:"myform",
+        autoheight:false,
+        width:350,
         elements:[
-          { type:"section", template:"Edit films" },
-          { view:"text", label:"Title" },
-          { view:"text", label:"Year" },
-          { view:"text", label:"Votes" },
-          { view:"text", label:"Rating" },
+          { view:"template", template:"edit films", type:"section" },
+          { view:"text", label:"Title", name:"title"},
+          { view:"text", label:"Year", name:"year"},
+          { view:"text", label:"Votes",  name:"votes"},
+          { view:"text", label:"Rating", name:"rating"},
           {cols:[
-            { view:"button", 
-            id:"add_button1",
-            value:"Add new", css:"webix_primary", 
-            click:function(){
-                if($$("formform").validate()){
-                    var item = $$("formform").getValues();
-                    $$("newdatatable").add(item);
-                    // webix.message({text:"validation is successful"})
-                    // $$("mywindow1").show()
-                } 
-            }},
-            // { view:"button", 
-            // id:"clear_button1",
-            // value:"Clear", 
-            // click:clear_formform},
-            { view:"button", 
-            id:"delete_button1",
-            value:"Delete", 
-            // click:clear_formform
-        },
-            { view:"button", 
-            id:"edit_button1",
-            value:"Edit data", 
-            // click:clear_formform
-        },
-        ]},
+              { view:"button", 
+               id:"save_button",
+               value:"Save", css:"webix_primary", 
+               click:function(){
+                var item_data = $$("myform").getValues();
+                if(item_data.id){
+                    $$("newdatatable").updateItem(item_data.id, item_data);
+                } else{
+                    console.log(item_data);
+                    $$("newdatatable").add(item_data);
+                }
+                  
+                }},
+              { view:"button", 
+              id:"clear_button",
+              value:"Clear", 
+              click:clear_form}
+          ]},
           {}
-        ]
-      }; 
+      ],
+  };
+
     var mainmulti = {
         cells:[ 
             { id:"Dashboard", 
@@ -99,6 +82,7 @@ webix.ready(function(){
           { id:"Admin", template:"Admin View"}
         ]
       };
+
     const secondRow = {
             cols:[sidemulti, {view:"resizer"}, mainmulti] 
     }
@@ -115,6 +99,11 @@ webix.ready(function(){
         rows:[ firstRow, secondRow, thirdRow]
     });
       
+    $$("newdatatable").attachEvent("onAfterSelect", function(id){
+      var values = $$("newdatatable").getItem(id);
+      $$("myform").setValues(values);
+    });
+
     function clear_form(){
             webix.confirm({
                 title:false,
@@ -129,8 +118,4 @@ webix.ready(function(){
                 }
               );
       };
-//       function clear_formform(){
-//               $$("formform").clear();
-//               $$("formform").clearValidation();
-//   };
     });  
