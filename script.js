@@ -39,8 +39,15 @@ webix.ready(function(){
        {id:"title", header:"Film Title", fillspace: true},
        {id:"year", header:"Released"},
        {id:"votes", header:"Votes"},
+       { id:"del", template:"{common.trashIcon()}" }
      ],
-     autoConfig:true,  url:"data/data.js",  scrollX:false
+     autoConfig:true,  url:"data/data.js",  scrollX:false,
+     onClick:{
+      "wxi-trash":function(e, id){
+           this.remove(id);
+           return false;
+      }
+    }
       };
 
     var form = {
