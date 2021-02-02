@@ -33,10 +33,10 @@ webix.ready(function(){
       };
 
 
-     var data = {autowidth:true, view:"datatable",  id:"newdatatable",
+     var data = {view:"datatable",  id:"newdatatable",
      columns:[
-       {id:"rank", header:""},
-       {id:"title", header:"Film Title"},
+       {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
+       {id:"title", header:"Film Title", fillspace: true},
        {id:"year", header:"Released"},
        {id:"votes", header:"Votes"},
      ],
@@ -73,7 +73,7 @@ webix.ready(function(){
               value:"Clear", 
               click:clear_form}
           ]},
-          {}
+          // {}
       ],
   };
 
