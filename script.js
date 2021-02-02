@@ -33,12 +33,13 @@ webix.ready(function(){
       };
 
 
-     var data = {view:"datatable",  id:"newdatatable",
+     var data = {view:"datatable",  id:"newdatatable", select:true,
+      hover:"myhover",
      columns:[
        {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
-       {id:"title", header:"Film Title", fillspace: true},
-       {id:"year", header:"Released"},
-       {id:"votes", header:"Votes"},
+       {id:"title", header:["Film Title", {content:"textFilter"}],  fillspace: true, sort:"string_strict"},
+       {id:"year", header:["Released", {content:"textFilter"}], sort:"int"},
+       {id:"votes", header:["Votes", {content:"textFilter"}], sort:"string"},
        { id:"del", template:"{common.trashIcon()}" }
      ],
      autoConfig:true,  url:"data/data.js",  scrollX:false,
@@ -115,6 +116,7 @@ webix.ready(function(){
       
     $$("newdatatable").attachEvent("onAfterSelect", function(id){
       var values = $$("newdatatable").getItem(id);
+      console.log(values);
       $$("myform").setValues(values);
     });
 
