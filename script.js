@@ -39,7 +39,10 @@ webix.ready(function(){
        {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
        {id:"title", header:["Film Title", {content:"textFilter"}],  fillspace: true, sort:"string_strict"},
        {id:"year", header:["Released", {content:"textFilter"}], sort:"int"},
-       {id:"votes", header:["Votes", {content:"textFilter"}], sort:"string"},
+       {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int", template:function(obj){ 
+        //  return webix.i18n.longDateFormatStr(obj.date);
+         return webix.i18n.numberFormat(obj.votes);
+      }},
        { id:"del", template:"{common.trashIcon()}" }
      ],
      autoConfig:true,  url:"data/data.js",  scrollX:false,
@@ -134,4 +137,5 @@ webix.ready(function(){
                 }
               );
       };
+
     });  
