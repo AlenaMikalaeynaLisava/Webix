@@ -33,7 +33,14 @@ webix.ready(function(){
       };
 
 
-     var data = {columnWidth:70, view:"datatable", select:true, id:"newdatatable", autoConfig:true,  url:"data/data.js",  scrollX:false
+     var data = {autowidth:true, view:"datatable",  id:"newdatatable",
+     columns:[
+       {id:"rank", header:""},
+       {id:"title", header:"Film Title"},
+       {id:"year", header:"Released"},
+       {id:"votes", header:"Votes"},
+     ],
+     autoConfig:true,  url:"data/data.js",  scrollX:false
       };
 
     var form = {
