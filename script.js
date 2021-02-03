@@ -39,12 +39,20 @@ webix.ready(function(){
        {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
        {id:"title", header:["Film Title", {content:"textFilter"}],  fillspace: true, sort:"string_strict"},
        {id:"year", header:["Released", {content:"textFilter"}], sort:"int"},
-       {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int", template:function(obj){ 
-        //  return webix.i18n.longDateFormatStr(obj.date);
-         return webix.i18n.numberFormat(obj.votes);
-      }},
+       {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int",
+      //   template:function(obj){ 
+      //   //  return webix.i18n.longDateFormatStr(obj.date);
+      //    return webix.i18n.numberFormat(obj.votes);
+      // }
+      
+    },
        { id:"del", template:"{common.trashIcon()}" }
      ],
+     scheme:{
+      $init:function(obj){
+        obj.votes = (obj.votes).match(/\d/g).join('');
+    }
+  },
      autoConfig:true,  url:"data/data.js",  scrollX:false,
      onClick:{
       "wxi-trash":function(e, id){
