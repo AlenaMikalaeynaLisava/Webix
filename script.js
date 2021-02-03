@@ -2,6 +2,7 @@ import {data} from './data.js'; // не {User}, просто User
 import {form} from './form.js';
 import {usersList} from './usersList.js';
 import {usersChart} from './usersChart.js';
+import {productsTree} from './productsTree.js';
 webix.ready(function(){
 
     const firstRow = {
@@ -47,7 +48,7 @@ webix.ready(function(){
           rows:[usersList,
             usersChart]
         },
-          { id:"Products", template:"Products view"},
+          productsTree,
           { id:"Admin", template:"Admin View"}
         ]
       };
@@ -70,7 +71,6 @@ webix.ready(function(){
       
     $$("newdatatable").attachEvent("onAfterSelect", function(id){
       var values = $$("newdatatable").getItem(id);
-      console.log(values);
       $$("myform").setValues(values);
     });
 
