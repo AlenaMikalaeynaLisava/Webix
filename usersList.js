@@ -7,7 +7,7 @@ select:true,
 url:"data/users.js",  
 scrollX:false,
 onClick:{
-  "wxi-close":function(e, id){
+  "remove-icon":function(e, id){
     this.remove(id);
     return false;
   }

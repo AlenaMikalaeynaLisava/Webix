@@ -6,7 +6,7 @@ columns:[
  {id:"year", header:["Released", {content:"textFilter"}], sort:"int"},
  {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int",
 },
- { id:"del", template:"{common.trashIcon()}" }
+ { id:"del", template:"{common.trashIcon()}", header:""}
 ],
 scheme:{
 $init:function(obj){

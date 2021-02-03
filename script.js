@@ -30,7 +30,7 @@ webix.ready(function(){
                   $$(id).show();
               }
             },
-            data:[ "Dashboard", "Users view", "Products view", "Admin"]
+            data:[ "Dashboard", "Users view", "Products view", "Admin view"]
           }
         ]
       };
@@ -44,7 +44,7 @@ webix.ready(function(){
             ]},
         usersView,
           productsTree,
-          { id:"Admin", template:"Admin View"}
+          { id:"Admin view", template:"Admin view"}
         ]
       };
 

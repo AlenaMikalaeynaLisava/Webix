@@ -2,7 +2,7 @@ export let productsTree = {
     view:"treetable",
     id:"Products view",
     autowidth:true,
-    select:"row",
+    select:"cell",// could be row
     columns:[
         { 
             id:"id",    
