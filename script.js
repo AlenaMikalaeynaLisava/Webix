@@ -1,8 +1,7 @@
-import {data} from './data.js'; // не {User}, просто User
+import {data} from './data.js'; 
 import {form} from './form.js';
-import {usersList} from './usersList.js';
-import {usersChart} from './usersChart.js';
 import {productsTree} from './productsTree.js';
+import {usersView} from "./usersView.js";
 webix.ready(function(){
 
     const firstRow = {
@@ -17,7 +16,6 @@ webix.ready(function(){
             }}
         ],
     }
-
     var sidemulti = { 
         css:"menu",
         rows:[ 
@@ -32,7 +30,7 @@ webix.ready(function(){
                   $$(id).show();
               }
             },
-            data:[ "Dashboard", "UsersList", "Products", "Admin"]
+            data:[ "Dashboard", "Users view", "Products view", "Admin"]
           }
         ]
       };
@@ -44,10 +42,7 @@ webix.ready(function(){
                 data,
                 form
             ]},
-          {id:"UsersList", 
-          rows:[usersList,
-            usersChart]
-        },
+        usersView,
           productsTree,
           { id:"Admin", template:"Admin View"}
         ]

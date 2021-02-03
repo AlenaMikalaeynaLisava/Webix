@@ -1,10 +1,8 @@
 export let productsTree = {
     view:"treetable",
-    id:"Products",
+    id:"Products view",
     autowidth:true,
     select:"row",
-    // width:800,
-    "open":true,
     columns:[
         { 
             id:"id",    
@@ -20,7 +18,6 @@ export let productsTree = {
             id:"price",   
             header:"Price",  
         }
-
     ],
     ready:function(){
         this.openAll();
