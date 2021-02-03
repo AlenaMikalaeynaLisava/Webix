@@ -2,7 +2,7 @@ export let usersList = {
   view:"list",
     id:"list",
 autoheight:false,
-template:"#name# #age# from #country# <span class='wxi-close'></span>",
+template:"#name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
 select:true,
 url:"data/users.js",  
 scrollX:false,
