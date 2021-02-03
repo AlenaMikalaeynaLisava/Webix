@@ -1,3 +1,7 @@
+import {data} from './data.js'; // не {User}, просто User
+import {form} from './form.js';
+import {usersList} from './usersList.js';
+import {usersChart} from './usersChart.js';
 webix.ready(function(){
 
     const firstRow = {
@@ -27,68 +31,10 @@ webix.ready(function(){
                   $$(id).show();
               }
             },
-            data:[ "Dashboard", "Users", "Products", "Admin"]
+            data:[ "Dashboard", "UsersList", "Products", "Admin"]
           }
         ]
       };
-
-
-     var data = {view:"datatable",  id:"newdatatable", select:true,
-      hover:"myhover",
-     columns:[
-       {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
-       {id:"title", header:["Film Title", {content:"textFilter"}],  fillspace: true, sort:"string_strict"},
-       {id:"year", header:["Released", {content:"textFilter"}], sort:"int"},
-       {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int",
-    },
-       { id:"del", template:"{common.trashIcon()}" }
-     ],
-     scheme:{
-      $init:function(obj){
-        obj.votes = (obj.votes).match(/\d/g).join('');
-    }
-  },
-     autoConfig:true,  url:"data/data.js",  scrollX:false,
-     onClick:{
-      "wxi-trash":function(e, id){
-           this.remove(id);
-           return false;
-      }
-    }
-      };
-
-    var form = {
-        view:"form",
-        id:"myform",
-        autoheight:false,
-        width:350,
-        elements:[
-          { view:"template", template:"edit films", type:"section" },
-          { view:"text", label:"Title", name:"title"},
-          { view:"text", label:"Year", name:"year"},
-          { view:"text", label:"Votes",  name:"votes"},
-          { view:"text", label:"Rating", name:"rating"},
-          {cols:[
-              { view:"button", 
-               id:"save_button",
-               value:"Save", css:"webix_primary", 
-               click:function(){
-                var item_data = $$("myform").getValues();
-                if(item_data.id){
-                    $$("newdatatable").updateItem(item_data.id, item_data);
-                } else{
-                    console.log(item_data);
-                    $$("newdatatable").add(item_data);
-                }
-                  
-                }},
-              { view:"button", 
-              id:"clear_button",
-              value:"Clear", 
-              click:clear_form}
-          ]},
-      ],
-  };
 
     var mainmulti = {
         cells:[ 
@@ -97,7 +43,10 @@ webix.ready(function(){
                 data,
                 form
             ]},
-          { id:"Users", template:"Users View"},
+          {id:"UsersList", 
+          rows:[usersList,
+            usersChart]
+        },
           { id:"Products", template:"Products view"},
           { id:"Admin", template:"Admin View"}
         ]
@@ -125,19 +74,10 @@ webix.ready(function(){
       $$("myform").setValues(values);
     });
 
-    function clear_form(){
-            webix.confirm({
-                title:false,
-                text:"Do you want to clear the form?"
-              }).then(
-                function(){
-                  $$("myform").clear();
-                  $$("myform").clearValidation();
-                }, 
-                function(){
-                  webix.message("Rejected");
-                }
-              );
-      };
-
+    $$("list_input").attachEvent("onTimedKeyPress",function(){
+      var value = this.getValue().toLowerCase();
+      $$("list").filter(function(obj){
+        return obj.name.toLowerCase().indexOf(value) !== -1;
+      })
+    });
     });  
