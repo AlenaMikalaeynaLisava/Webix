@@ -40,11 +40,6 @@ webix.ready(function(){
        {id:"title", header:["Film Title", {content:"textFilter"}],  fillspace: true, sort:"string_strict"},
        {id:"year", header:["Released", {content:"textFilter"}], sort:"int"},
        {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int",
-      //   template:function(obj){ 
-      //   //  return webix.i18n.longDateFormatStr(obj.date);
-      //    return webix.i18n.numberFormat(obj.votes);
-      // }
-      
     },
        { id:"del", template:"{common.trashIcon()}" }
      ],
@@ -92,7 +87,6 @@ webix.ready(function(){
               value:"Clear", 
               click:clear_form}
           ]},
-          // {}
       ],
   };
 
