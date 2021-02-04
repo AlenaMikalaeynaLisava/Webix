@@ -1,7 +1,6 @@
 export let productsTree = {
     view:"treetable",
     id:"Products view",
-    autowidth:true,
     select:"cell",// could be row
     columns:[
         { 
@@ -10,14 +9,14 @@ export let productsTree = {
         },
         { 
             id:"title",
+            fillspace: true,
             header:"Title", 
-            width:500,
             template:"{common.treetable()} #title#",
         },
         { 
             id:"price",   
             header:"Price",  
-        }
+        },
     ],
     ready:function(){
         this.openAll();

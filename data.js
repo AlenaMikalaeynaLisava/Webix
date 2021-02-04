@@ -10,10 +10,12 @@ columns:[
 ],
 scheme:{
 $init:function(obj){
-  obj.votes = (obj.votes).match(/\d/g).join('');
+
+  const result = (obj.votes).match(/\d/g); 
+  obj.votes = result ? (+result.join('')).toFixed() : 0; 
 }
 },
-autoConfig:true,  url:"data/data.js",  scrollX:false,
+url:"data/data.js",  scrollX:false,
 onClick:{
 "wxi-trash":function(e, id){
      this.remove(id);

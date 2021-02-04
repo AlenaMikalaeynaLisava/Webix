@@ -3,7 +3,16 @@ import {form} from './form.js';
 import {productsTree} from './productsTree.js';
 import {usersView} from "./usersView.js";
 webix.ready(function(){
-
+  webix.ui({
+    view:"popup",
+    id:"mywindow",
+    body:{
+        view:"list",
+        data:[ "Settings", "Log out"],
+        autoheight:true,
+        width:250,
+    }
+})
     const firstRow = {
         view:"toolbar", 
         id:"firstrow",

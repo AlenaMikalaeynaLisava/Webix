@@ -1,11 +1,9 @@
 export let usersList = {
   view:"list",
     id:"list",
-autoheight:false,
 template:"#name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
 select:true,
 url:"data/users.js",  
-scrollX:false,
 onClick:{
   "remove-icon":function(e, id){
     this.remove(id);
