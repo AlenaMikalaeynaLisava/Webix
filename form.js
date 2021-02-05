@@ -47,6 +47,7 @@ function clear_form(){
         function(){
           $$("myform").clear();
           $$("myform").clearValidation();
+          $$("newdatatable").unselectAll();
         }, 
         function(){
           webix.message("Rejected");

@@ -1,9 +1,9 @@
-export let data = {view:"datatable",  id:"newdatatable", select:true,
+export let newdatatable = {view:"datatable",  id:"newdatatable", select:true,
 hover:"myhover",
 columns:[
  {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
  {id:"title", header:["Film Title", {content:"textFilter"}], editor:"text", fillspace: true, sort:"string_strict"},
- {id:"categoryId",	header:["Category",{content:"textFilter"}], 
+ {id:"categoryId",	header:["Category",{content:"selectFilter"}], 
  collection:"categories.js", editor:"text"
 },
 {id:"rating", header:["Rating", {content:"textFilter"}], sort:"int"},

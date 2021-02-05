@@ -1,4 +1,4 @@
-import {data} from './data.js'; 
+import {newdatatable} from './data.js'; 
 import {form} from './form.js';
 import {editlist} from './usersList.js';
 import {chart} from './usersChart.js';
@@ -57,7 +57,7 @@ webix.ready(function(){
         cells:[ 
             { id:"Dashboard", 
             cols:[
-                data,
+              newdatatable,
                 form
             ]},
             {
@@ -73,7 +73,6 @@ webix.ready(function(){
           { id:"Admin view", template:"Admin view"}
         ]
       };
-
 
       
     const secondRow = {
@@ -102,10 +101,7 @@ webix.ready(function(){
     })
   });
      
-
-
     $$("myform").bind($$("newdatatable"));
-
     $$("list_input").attachEvent("onTimedKeyPress",function(){
       var value = this.getValue().toLowerCase();
       $$("editlist").filter(function(obj){
