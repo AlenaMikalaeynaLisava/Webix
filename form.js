@@ -13,21 +13,13 @@ export let form = {
           { view:"button", 
            id:"save_button",
            value:"Save", css:"webix_primary", 
-           click:function(){
-            if($$("myform").validate()){
-            var item_data = $$("myform").getValues();
-            if(item_data.id){
-                $$("newdatatable").updateItem(item_data.id, item_data);
-            } else{
-                const newId = $$("newdatatable").add(item_data);
-                $$("newdatatable").showItem(newId);
-            }
-          }
-            }},
+          type:"form", click:save_form
+          },
           { view:"button", 
           id:"clear_button",
           value:"Clear", 
-          click:clear_form}
+          click:clear_form
+        }
       ]},
   ],
   rules:{
@@ -36,9 +28,6 @@ export let form = {
         return value>1900 && value <2021;
       },
     votes:webix.rules.isNumber,
-        // return value<100000;
-    //     return  value webix.rules.isNomber;
-    // },
     rating: function(value){
         return value!=0 && webix.rules.isNotEmpty;
     }
@@ -63,4 +52,17 @@ function clear_form(){
           webix.message("Rejected");
         }
       );
+};
+function save_form(){
+  var form = $$('myform');
+  if(form.isDirty()){
+    if(form.validate()){
+      const t  = form.save();
+            var item_data = $$("myform").getValues();
+            if(!item_data.id){
+              webix.message("New item sdded");
+            } 
+    }
+
+  }
 };

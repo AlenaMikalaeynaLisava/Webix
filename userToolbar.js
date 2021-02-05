@@ -9,7 +9,7 @@ export let userToolbar = {
       id:"sort_asc_button",
       value:"Sort asc", css:"webix_primary",
     width:120,  click:function(){
-      $$('list').sort('#name#','asc');
+      $$('editlist').sort('#name#','asc');
       $$('chart').sort('#age#','asc')
         }
      },
@@ -18,8 +18,11 @@ export let userToolbar = {
       value:"Sort desc", css:"webix_primary",
       width:120, 
       click:function(){
-        $$('list').sort('#name#','desc');
+        $$('editlist').sort('#name#','desc');
         $$('chart').sort('#age#','desc')
       }
-     }]
+     },
+     { view:"button", value:"Add new",  css:"webix_primary", width:120, click:function(){
+      $$("editlist").add({name:"Alan", age:25, country:"Germany"})
+    }},]
 };
