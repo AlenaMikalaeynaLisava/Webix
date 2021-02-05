@@ -2,13 +2,13 @@ webix.protoUI({
   name:"editlist"
 }, webix.EditAbility, webix.ui.list);
 
-export let usersList = {
+export let editlist =         {
   view:"editlist",
-    id:"list",
+    id:"editlist",
     editable:true,
     editor:"text",
     editValue:"name",
-template:"#name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
+template:" #name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
 select:true,
 url:"data/users.js",  
 scheme:{
@@ -26,6 +26,6 @@ onClick:{
     this.remove(id);
     return false;
   }
-},
+}
 };
 

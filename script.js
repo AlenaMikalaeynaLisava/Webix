@@ -1,5 +1,7 @@
 import {data} from './data.js'; 
 import {form} from './form.js';
+import {editlist} from './usersList.js';
+import {chart} from './usersChart.js';
 import {userToolbar} from './userToolbar.js';
 import {productsTree} from './productsTree.js';
 
@@ -8,10 +10,6 @@ webix.protoUI({
 }, webix.EditAbility, webix.ui.list);
 
 webix.ready(function(){
-
-
-
-
 
   webix.ui({
     view:"popup",
@@ -55,7 +53,6 @@ webix.ready(function(){
       };
 
 
-    
     var mainmulti = {
         cells:[ 
             { id:"Dashboard", 
@@ -68,42 +65,8 @@ webix.ready(function(){
               padding:10,
               id:"Users view", 
                     rows:[userToolbar,
-                      {
-                        view:"editlist",
-                          id:"editlist",
-                          editable:true,
-                          editor:"text",
-                          editValue:"name",
-                      template:" #name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
-                      select:true,
-                      url:"data/users.js",  
-                      scheme:{
-                        $init:function(obj){
-                          if(+obj.age<26){
-                            obj.$css = "highlight";
-                          }
-                        }
-                        },
-                        rules:{
-                          name:webix.rules.isNotEmpty,
-                      },
-                      onClick:{
-                        "remove-icon":function(e, id){
-                          this.remove(id);
-                          return false;
-                        }
-                      }
-                      },
-                      {  view:"chart", 
-                        id:"mychart",
-                        type:"bar",
-                        value:"#name#",
-                        xAxis:{
-                           title: "Country",
-                          template:"#country#"
-                        },
-                        yAxis:{},
-                      }
+                      editlist,
+                      chart
                     ]
                 },
           productsTree,
