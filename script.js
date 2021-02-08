@@ -1,8 +1,16 @@
-import {data} from './data.js'; 
+import {newdatatable} from './data.js'; 
 import {form} from './form.js';
+import {editlist} from './usersList.js';
+import {chart} from './usersChart.js';
+import {userToolbar} from './userToolbar.js';
 import {productsTree} from './productsTree.js';
-import {usersView} from "./usersView.js";
+
+webix.protoUI({
+  name:"editlist"
+}, webix.EditAbility, webix.ui.list);
+
 webix.ready(function(){
+
   webix.ui({
     view:"popup",
     id:"mywindow",
@@ -25,7 +33,7 @@ webix.ready(function(){
             }}
         ],
     }
-    var sidemulti = { 
+    const sidemulti = { 
         css:"menu",
         rows:[ 
           { 
@@ -44,19 +52,29 @@ webix.ready(function(){
         ]
       };
 
-    var mainmulti = {
+
+    const mainmulti = {
         cells:[ 
             { id:"Dashboard", 
             cols:[
-                data,
+              newdatatable,
                 form
             ]},
-        usersView,
+            {
+              margin:20,
+              padding:10,
+              id:"Users view", 
+                    rows:[userToolbar,
+                      editlist,
+                      chart
+                    ]
+                },
           productsTree,
           { id:"Admin view", template:"Admin view"}
         ]
       };
 
+      
     const secondRow = {
             cols:[sidemulti, {view:"resizer"}, mainmulti] 
     }
@@ -73,15 +91,22 @@ webix.ready(function(){
         rows:[ firstRow, secondRow, thirdRow]
     });
       
-    $$("newdatatable").attachEvent("onAfterSelect", function(id){
-      var values = $$("newdatatable").getItem(id);
-      $$("myform").setValues(values);
-    });
 
+    $$("mychart").sync($$("editlist"),function(){
+      $$("mychart").group({
+        by:"country",
+        map:{
+          name:["name", "count"]
+        }
+    })
+  });
+     
+    $$("myform").bind($$("newdatatable"));
     $$("list_input").attachEvent("onTimedKeyPress",function(){
-      var value = this.getValue().toLowerCase();
-      $$("list").filter(function(obj){
+      let value = this.getValue().toLowerCase();
+      $$("editlist").filter(function(obj){
         return obj.name.toLowerCase().indexOf(value) !== -1;
       })
     });
     });  
+    

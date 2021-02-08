@@ -1,35 +1,30 @@
-export let usersList = {
-  view:"list",
-    id:"list",
-template:"#name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
+webix.protoUI({
+  name:"editlist"
+}, webix.EditAbility, webix.ui.list);
+
+export let editlist =         {
+  view:"editlist",
+    id:"editlist",
+    editable:true,
+    editor:"text",
+    editValue:"name",
+template:" #name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
 select:true,
 url:"data/users.js",  
+scheme:{
+  $init:function(obj){
+    if(+obj.age<26){
+      obj.$css = "highlight";
+    }
+  }
+  },
+  rules:{
+    name:webix.rules.isNotEmpty,
+},
 onClick:{
   "remove-icon":function(e, id){
     this.remove(id);
     return false;
-  }
-},
-ready(){
-  for (let i=0; i<5; i++){
-    const id = this.getIdByIndex(i);
-    switch(i) {
-      case 0:  
-      this.addCss(id, "red")
-        break;
-      case 1: 
-      this.addCss(id, "yellow")
-        break;
-      case 2: 
-      this.addCss(id, "green")
-        break;
-        case 3: 
-      this.addCss(id, "silver")
-        break;
-        case 4: 
-      this.addCss(id, "magenta")
-        break;
-    }
   }
 }
 };

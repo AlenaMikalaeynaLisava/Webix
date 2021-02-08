@@ -1,7 +1,8 @@
 export let productsTree = {
     view:"treetable",
     id:"Products view",
-    select:"cell",// could be row
+    editable:true,
+    select:"cell",
     columns:[
         { 
             id:"id",    
@@ -10,14 +11,20 @@ export let productsTree = {
         { 
             id:"title",
             fillspace: true,
-            header:"Title", 
+            header:"Title",
+            editor:"text", 
             template:"{common.treetable()} #title#",
         },
         { 
             id:"price",   
             header:"Price",  
+            editor:"text",
         },
     ],
+    rules:{
+        title:webix.rules.isNotEmpty,
+        price:webix.rules.isNumber
+    },    
     ready:function(){
         this.openAll();
       },

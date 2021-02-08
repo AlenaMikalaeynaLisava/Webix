@@ -1,11 +1,11 @@
-export let usersChart= {  view:"chart", 
-id:"chart",
+export let chart={  view:"chart", 
+id:"mychart",
 type:"bar",
-border:true,
-value:"#age#",
+value:"#name#",
 xAxis:{
-  title: "Age",
-  template:"#age#"
+   title: "Country",
+  template:"#country#"
 },
-url:"data/users.js",  
-};
+yAxis:{},
+}
+
