@@ -1,15 +1,32 @@
-import {newdatatable} from './data.js'; 
+// import {newdatatable} from './data.js'; 
 import {form} from './form.js';
 import {editlist} from './usersList.js';
 import {chart} from './usersChart.js';
 import {userToolbar} from './userToolbar.js';
 import {productsTree} from './productsTree.js';
+import {admin} from './admin.js';
+
+const categories = new webix.DataCollection({
+  url:"categories.js"
+});
+
+
+const  users = new webix.DataCollection({
+  
+  url:"data/users.js"
+});
+
 
 webix.protoUI({
   name:"editlist"
 }, webix.EditAbility, webix.ui.list);
 
 webix.ready(function(){
+
+  // const categories = new webix.DataCollection({
+  //   url:"categories.js"
+  // });
+  
 
   webix.ui({
     view:"popup",
@@ -47,7 +64,7 @@ webix.ready(function(){
                   $$(id).show();
               }
             },
-            data:[ "Dashboard", "Users view", "Products view", "Admin view"]
+            data:[ "Dashboard", "Users view", "Products view", "Admin"]
           }
         ]
       };
@@ -57,7 +74,37 @@ webix.ready(function(){
         cells:[ 
             { id:"Dashboard", 
             cols:[
-              newdatatable,
+               {view:"datatable",  id:"newdatatable", select:true,
+hover:"myhover",
+columns:[
+ {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
+ {id:"title", header:["Film Title", {content:"textFilter"}], editor:"text", fillspace: true, sort:"string_strict"},
+ {id:"categoryId",	
+ header:["Category",{content:"selectFilter"}], 
+ collection:categories,
+  editor:"text"
+},
+{id:"rating", header:["Rating", {content:"textFilter"}], sort:"int"},
+ {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int"},
+{id:"year", header:["Year"], sort:"int"},
+ { id:"del", template:"{common.trashIcon()}", header:""}
+],
+scheme:{
+$init:function(obj){
+  const result = (obj.votes).match(/\d/g); 
+  obj.votes = result ? (+result.join('')).toFixed() : 0; 
+  obj.categoryId = Math.floor(Math.random() * 4) + 1;
+  
+}
+},
+url:"data/data.js",  scrollX:false,
+onClick:{
+"wxi-trash":function(e, id){
+     this.remove(id);
+     return false;
+}
+}
+},
                 form
             ]},
             {
@@ -70,7 +117,7 @@ webix.ready(function(){
                     ]
                 },
           productsTree,
-          { id:"Admin view", template:"Admin view"}
+          admin
         ]
       };
 
@@ -108,5 +155,24 @@ webix.ready(function(){
         return obj.name.toLowerCase().indexOf(value) !== -1;
       })
     });
+    $$("removeButton").attachEvent("onItemClick",function(){var sel = $$("admindatatable").getSelectedId();
+    if(sel)
+    categories.remove(sel);});
+    $$("addButton").attachEvent("onItemClick",function(){categories.add({value:"New category"})});
+
+
+    // $$("newdatatable").attachEvent("onItemClick",function(){categories.add({value:"New category"})})
+
+    $$("admindatatable").sync(categories);
+  //   $$("newdatatable").sync(categories, function(){
+  //     this.categoryId
+  // });
+
+
+console.log($$("newdatatable").data);
+
+    //$$("newdatatable").categoryId).sync(categories);
     });  
+
+
     
