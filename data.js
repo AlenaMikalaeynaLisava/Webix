@@ -12,7 +12,6 @@ columns:[
 {id:"year", header:["Year"], sort:"int"},
  { id:"del", template:"{common.trashIcon()}", header:""}
 ],
- editable:true,
 scheme:{
 $init:function(obj){
   const result = (obj.votes).match(/\d/g); 
