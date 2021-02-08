@@ -10,7 +10,6 @@ export let userToolbar = {
       value:"Sort asc", css:"webix_primary",
     width:120,  click:function(){
       $$('editlist').sort('#name#','asc');
-      $$('chart').sort('#age#','asc')
         }
      },
       {view:"button", 
@@ -19,7 +18,6 @@ export let userToolbar = {
       width:120, 
       click:function(){
         $$('editlist').sort('#name#','desc');
-        $$('chart').sort('#age#','desc')
       }
      },
      { view:"button", value:"Add new",  css:"webix_primary", width:120, click:function(){

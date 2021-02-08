@@ -2,7 +2,7 @@ export let productsTree = {
     view:"treetable",
     id:"Products view",
     editable:true,
-    select:"cell",// could be row
+    select:"cell",
     columns:[
         { 
             id:"id",    

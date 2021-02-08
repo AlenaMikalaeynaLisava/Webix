@@ -33,7 +33,7 @@ webix.ready(function(){
             }}
         ],
     }
-    var sidemulti = { 
+    const sidemulti = { 
         css:"menu",
         rows:[ 
           { 
@@ -53,7 +53,7 @@ webix.ready(function(){
       };
 
 
-    var mainmulti = {
+    const mainmulti = {
         cells:[ 
             { id:"Dashboard", 
             cols:[
@@ -103,7 +103,7 @@ webix.ready(function(){
      
     $$("myform").bind($$("newdatatable"));
     $$("list_input").attachEvent("onTimedKeyPress",function(){
-      var value = this.getValue().toLowerCase();
+      let value = this.getValue().toLowerCase();
       $$("editlist").filter(function(obj){
         return obj.name.toLowerCase().indexOf(value) !== -1;
       })

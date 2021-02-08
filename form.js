@@ -55,13 +55,13 @@ function clear_form(){
       );
 };
 function save_form(){
-  var form = $$('myform');
+  let form = $$('myform');
   if(form.isDirty()){
     if(form.validate()){
       const t  = form.save();
-            var item_data = $$("myform").getValues();
+            let item_data = $$("myform").getValues();
             if(!item_data.id){
-              webix.message("New item sdded");
+              webix.message("New item added");
             } 
     }
 
