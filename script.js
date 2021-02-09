@@ -95,7 +95,7 @@ webix.ready(function(){
     });
       
     $$("editlist").sync(users);
-    $$("mychart").sync($$("editlist"),function(){
+    $$("mychart").sync(users,function(){
       $$("mychart").group({
         by:"country",
         map:{
