@@ -12,11 +12,10 @@ rows:[
   {
     view:"datatable", 
     id: "admindatatable",
-    scrollX:false,
     select:"row", editable:true, editaction:"click",
     columns:[
       {id:"id", header:"",  css:{"background":"#F4F5F9"}},
-      {id:"value", editor:"text", header:"Film category"},
+      {id:"value", editor:"text", header:"Film category", fillspace: true},
     ],
   }
 ]

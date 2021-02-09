@@ -8,12 +8,6 @@ import {admin} from './admin.js';
 import {categories} from './categories.js';
 import {users} from './data/users.js';
 
-// const  users = new webix.DataCollection({
-  
-//   url:"data/users.js"
-// });
-
-
 webix.protoUI({
   name:"editlist"
 }, webix.EditAbility, webix.ui.list);
@@ -117,6 +111,7 @@ webix.ready(function(){
         return obj.name.toLowerCase().indexOf(value) !== -1;
       })
     });
+    
     $$("removeButton").attachEvent("onItemClick",function(){var sel = $$("admindatatable").getSelectedId();
     if(sel)
     categories.remove(sel);});
