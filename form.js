@@ -1,3 +1,4 @@
+import {categories} from './categories.js';
 export let form = {
     view:"form",
     id:"myform",
@@ -21,6 +22,7 @@ export let form = {
           click:clear_form
         }
       ]},
+      { view:"richselect", id:"categoryId",label:"Richselect", value:1, options:categories},
   ],
   rules:{
     title:webix.rules.isNotEmpty,

@@ -1,4 +1,4 @@
-[
+const data =[
 	{ "id":1, "name":"Alan Smith", "age":57, "country":"USA"},
 	{ "id":2, "name":"Nina Brown", "age":32, "country":"Germany"},
 	{ "id":3, "name":"Kevin Sallivan", "age":21, "country":"Canada"},
@@ -12,3 +12,8 @@
 	{ "id":11, "name":"Paolo Sanders", "age":40, "country":"Spain"},
 	{ "id":12, "name":"Tanya Krieg", "age":28, "country":"Germany"}
 ]
+
+export const users = new webix.DataCollection({
+	data
+  });
+  

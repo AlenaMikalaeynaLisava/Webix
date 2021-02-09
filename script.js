@@ -1,20 +1,17 @@
-// import {newdatatable} from './data.js'; 
+import {newdatatable} from './data.js'; 
 import {form} from './form.js';
 import {editlist} from './usersList.js';
 import {chart} from './usersChart.js';
 import {userToolbar} from './userToolbar.js';
 import {productsTree} from './productsTree.js';
 import {admin} from './admin.js';
+import {categories} from './categories.js';
+import {users} from './data/users.js';
 
-const categories = new webix.DataCollection({
-  url:"categories.js"
-});
-
-
-const  users = new webix.DataCollection({
+// const  users = new webix.DataCollection({
   
-  url:"data/users.js"
-});
+//   url:"data/users.js"
+// });
 
 
 webix.protoUI({
@@ -22,11 +19,6 @@ webix.protoUI({
 }, webix.EditAbility, webix.ui.list);
 
 webix.ready(function(){
-
-  // const categories = new webix.DataCollection({
-  //   url:"categories.js"
-  // });
-  
 
   webix.ui({
     view:"popup",
@@ -74,37 +66,7 @@ webix.ready(function(){
         cells:[ 
             { id:"Dashboard", 
             cols:[
-               {view:"datatable",  id:"newdatatable", select:true,
-hover:"myhover",
-columns:[
- {id:"rank", header:"",  css:{"background":"#F4F5F9"}},
- {id:"title", header:["Film Title", {content:"textFilter"}], editor:"text", fillspace: true, sort:"string_strict"},
- {id:"categoryId",	
- header:["Category",{content:"selectFilter"}], 
- collection:categories,
-  editor:"text"
-},
-{id:"rating", header:["Rating", {content:"textFilter"}], sort:"int"},
- {id:"votes", header:["Votes", {content:"textFilter"}], sort:"int"},
-{id:"year", header:["Year"], sort:"int"},
- { id:"del", template:"{common.trashIcon()}", header:""}
-],
-scheme:{
-$init:function(obj){
-  const result = (obj.votes).match(/\d/g); 
-  obj.votes = result ? (+result.join('')).toFixed() : 0; 
-  obj.categoryId = Math.floor(Math.random() * 4) + 1;
-  
-}
-},
-url:"data/data.js",  scrollX:false,
-onClick:{
-"wxi-trash":function(e, id){
-     this.remove(id);
-     return false;
-}
-}
-},
+              newdatatable,
                 form
             ]},
             {
@@ -138,7 +100,7 @@ onClick:{
         rows:[ firstRow, secondRow, thirdRow]
     });
       
-
+    $$("editlist").sync(users);
     $$("mychart").sync($$("editlist"),function(){
       $$("mychart").group({
         by:"country",
@@ -161,17 +123,9 @@ onClick:{
     $$("addButton").attachEvent("onItemClick",function(){categories.add({value:"New category"})});
 
 
-    // $$("newdatatable").attachEvent("onItemClick",function(){categories.add({value:"New category"})})
-
     $$("admindatatable").sync(categories);
-  //   $$("newdatatable").sync(categories, function(){
-  //     this.categoryId
-  // });
 
 
-console.log($$("newdatatable").data);
-
-    //$$("newdatatable").categoryId).sync(categories);
     });  
 
 

@@ -1,3 +1,5 @@
+import {users} from './data/users.js';
+
 export let userToolbar = {
     view:"toolbar",
     id:"myToolbar",
@@ -21,6 +23,7 @@ export let userToolbar = {
       }
      },
      { view:"button", value:"Add new",  css:"webix_primary", width:120, click:function(){
-      $$("editlist").add({name:"Alan", age:25, country:"Germany"})
+      $$("editlist").add({name:"Alan", age:25, country:"Germany"});
+      console.log(users);
     }},]
 };

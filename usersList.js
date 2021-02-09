@@ -10,7 +10,6 @@ export let editlist =         {
     editValue:"name",
 template:" #name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
 select:true,
-url:"data/users.js",  
 scheme:{
   $init:function(obj){
     if(+obj.age<26){
