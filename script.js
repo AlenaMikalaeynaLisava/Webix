@@ -5,7 +5,7 @@ import {chart} from './usersChart.js';
 import {userToolbar} from './userToolbar.js';
 import {productsTree} from './productsTree.js';
 import {admin} from './admin.js';
-import {categories} from './categories.js';
+import {categories} from '/data/categories.js';
 import {users} from './data/users.js';
 
 webix.protoUI({
@@ -111,15 +111,14 @@ webix.ready(function(){
         return obj.name.toLowerCase().indexOf(value) !== -1;
       })
     });
-    
+    $$("admindatatable").sync(categories);
     $$("removeButton").attachEvent("onItemClick",function(){var sel = $$("admindatatable").getSelectedId();
     if(sel)
     categories.remove(sel);});
-    $$("addButton").attachEvent("onItemClick",function(){categories.add({value:"New category"})});
+    $$("addButton").attachEvent("onItemClick",function(){categories.add({value:"Mycategory"})});
 
 
-    $$("admindatatable").sync(categories);
-
+   
 
     });  
 

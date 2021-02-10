@@ -1,4 +1,4 @@
-import {categories} from './categories.js';
+import {categories} from './data/categories.js';
 export let form = {
     view:"form",
     id:"myform",
@@ -10,6 +10,7 @@ export let form = {
       { view:"text", label:"Year", name:"year", invalidMessage:"Enter year between 1900 and 2021"},
       { view:"text", label:"Votes",  name:"votes", invalidMessage:"Votes must be number"},
       { view:"text", label:"Rating", name:"rating", invalidMessage:"Enter non zero rating, please"},
+      { view:"richselect",name:"categoryId", id:"categoryId",label:"Richselect", options:categories},
       {cols:[
           { view:"button", 
            id:"save_button",
@@ -22,7 +23,7 @@ export let form = {
           click:clear_form
         }
       ]},
-      { view:"richselect", id:"categoryId",label:"Richselect", value:1, options:categories},
+     
   ],
   rules:{
     title:webix.rules.isNotEmpty,

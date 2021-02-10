@@ -22,8 +22,5 @@ export let userToolbar = {
         $$('editlist').sort('#name#','desc');
       }
      },
-     { view:"button", value:"Add new",  css:"webix_primary", width:120, click:function(){
-      $$("editlist").add({name:"Alan", age:25, country:"Germany"});
-      console.log(users);
-    }},]
+]
 };
