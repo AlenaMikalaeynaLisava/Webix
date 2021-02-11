@@ -5,7 +5,7 @@ import {chart} from './usersChart.js';
 import {userToolbar} from './userToolbar.js';
 import {productsTree} from './productsTree.js';
 import {admin} from './admin.js';
-import {categories} from '/data/categories.js';
+import {categories} from './data/categories.js';
 import {users} from './data/users.js';
 
 webix.protoUI({
