@@ -4,6 +4,9 @@ import {editlist} from './usersList.js';
 import {chart} from './usersChart.js';
 import {userToolbar} from './userToolbar.js';
 import {productsTree} from './productsTree.js';
+import {admin} from './admin.js';
+import {categories} from './data/categories.js';
+import {users} from './data/users.js';
 
 webix.protoUI({
   name:"editlist"
@@ -47,7 +50,7 @@ webix.ready(function(){
                   $$(id).show();
               }
             },
-            data:[ "Dashboard", "Users view", "Products view", "Admin view"]
+            data:[ "Dashboard", "Users view", "Products view", "Admin"]
           }
         ]
       };
@@ -70,7 +73,7 @@ webix.ready(function(){
                     ]
                 },
           productsTree,
-          { id:"Admin view", template:"Admin view"}
+          admin
         ]
       };
 
@@ -91,8 +94,8 @@ webix.ready(function(){
         rows:[ firstRow, secondRow, thirdRow]
     });
       
-
-    $$("mychart").sync($$("editlist"),function(){
+    $$("editlist").sync(users);
+    $$("mychart").sync(users,function(){
       $$("mychart").group({
         by:"country",
         map:{
@@ -100,6 +103,11 @@ webix.ready(function(){
         }
     })
   });
+
+  $$("removeButtonUser").attachEvent("onItemClick",function(){var sel = $$("editlist").getSelectedId();
+    if(sel)
+    users.remove(sel);});
+    $$("addButtonUser").attachEvent("onItemClick",function(){users.add({name:"Alan", age:25, country:"Germany"})});
      
     $$("myform").bind($$("newdatatable"));
     $$("list_input").attachEvent("onTimedKeyPress",function(){
@@ -108,5 +116,16 @@ webix.ready(function(){
         return obj.name.toLowerCase().indexOf(value) !== -1;
       })
     });
+    $$("admindatatable").sync(categories);
+    $$("removeButton").attachEvent("onItemClick",function(){var sel = $$("admindatatable").getSelectedId();
+    if(sel)
+    categories.remove(sel);});
+    $$("addButton").attachEvent("onItemClick",function(){categories.add({value:"Mycategory"})});
+
+
+   
+
     });  
+
+
     

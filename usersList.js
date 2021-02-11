@@ -8,9 +8,8 @@ export let editlist =         {
     editable:true,
     editor:"text",
     editValue:"name",
-template:" #name# #age# from #country# <span class='webix_icon mdi mdi-close remove-icon' title='Remove'></span>",
+template:" #name# #age# from #country#",
 select:true,
-url:"data/users.js",  
 scheme:{
   $init:function(obj){
     if(+obj.age<26){
@@ -21,11 +20,5 @@ scheme:{
   rules:{
     name:webix.rules.isNotEmpty,
 },
-onClick:{
-  "remove-icon":function(e, id){
-    this.remove(id);
-    return false;
-  }
-}
 };
 
