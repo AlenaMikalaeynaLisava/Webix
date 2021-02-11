@@ -103,6 +103,11 @@ webix.ready(function(){
         }
     })
   });
+
+  $$("removeButtonUser").attachEvent("onItemClick",function(){var sel = $$("editlist").getSelectedId();
+    if(sel)
+    users.remove(sel);});
+    $$("addButtonUser").attachEvent("onItemClick",function(){users.add({name:"Alan", age:25, country:"Germany"})});
      
     $$("myform").bind($$("newdatatable"));
     $$("list_input").attachEvent("onTimedKeyPress",function(){

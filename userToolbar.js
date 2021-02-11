@@ -1,5 +1,3 @@
-import {users} from './data/users.js';
-
 export let userToolbar = {
     view:"toolbar",
     id:"myToolbar",
@@ -22,5 +20,9 @@ export let userToolbar = {
         $$('editlist').sort('#name#','desc');
       }
      },
+     { view:"button",id:"addButtonUser", value:"Add new", 
+    },
+      { view:"button", id:"removeButtonUser", value:"Remove selected", 
+    },
 ]
 };
